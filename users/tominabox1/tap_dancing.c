@@ -16,7 +16,6 @@ void qdot_reset(qk_tap_dance_state_t *state, void *user_data) {
             unregister_code(KC_SLSH);
     }
 
-
 void dlp_each(qk_tap_dance_state_t *state, void *user_data) {
     switch (state->count) {
         case 1:

@@ -1,4 +1,3 @@
-
 // Combos
 enum combo_events {
   CAPS_COMBO,
