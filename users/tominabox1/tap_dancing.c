@@ -109,7 +109,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return 200;
         case LT(_FKEY, KC_M):
             return 200;
-        case LT(_NAV, KC_V):
+        case LT(_NAV, KC_Z):
             return 200;
         case LT(_NAV, KC_B):
             return 200;
