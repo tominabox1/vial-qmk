@@ -15,7 +15,7 @@ enum combo_events {
 };
 
 const uint16_t PROGMEM caps_combo[] = {LSFT_T(KC_T), RSFT_T(KC_N), COMBO_END};
-const uint16_t PROGMEM cret[] = {LT(_NUM_SYM,KC_B), LT(_NAV, KC_V), COMBO_END};
+const uint16_t PROGMEM cret[] = {RCTL_T(KC_E), RALT_T(KC_I), COMBO_END};
 const uint16_t PROGMEM combo_pp[] = {KC_7, KC_9, COMBO_END};
 // const uint16_t PROGMEM combo_pp[] = {LT(_NUM_SYM, KC_SPC), KC_L, KC_Y, COMBO_END};
 const uint16_t PROGMEM combo_next[] = {KC_8, KC_9, COMBO_END};
