@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define MANUFACTURER        "Massdrop Inc."
 #define PRODUCT             "ALT Keyboard"
-#define SERIAL_NUM          "Unavailable"
+#define SERIAL_NUM "vial:f64c2b3c"
 
 /* key matrix size */
 #define MATRIX_ROWS 5

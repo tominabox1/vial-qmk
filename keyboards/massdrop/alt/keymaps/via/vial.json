@@ -1,7 +1,7 @@
 {
     "name": "Drop Alt",
-    "vendorId": "0x04D8",
-    "productId": "0xEED3",
+    "vendorId": "0x04d8",
+    "productId": "0xeec5",
     "lighting": "none",
     "matrix": {
         "rows": 5,
