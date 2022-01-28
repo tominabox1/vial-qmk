@@ -26,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT_ID      0x6C78
 #define DEVICE_VER      0x0001
 #define PRODUCT         Littlefoot LX
+#define MANUFACTURER    tominabox1
 
 /* key matrix size */
 #define MATRIX_ROWS 5
@@ -34,7 +35,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* key matrix pins */
 #define MATRIX_ROW_PINS { D5, F4, D3, F1, F0 }
 #define MATRIX_COL_PINS { D7, D6, D4, E2, F5, F6, F7, B6, B5, B4 } // uncomment for original groupbuy
-// #define MATRIX_COL_PINS { D7, D6, D4, C7, F5, F6, F7, B6, B5, B4 } // uncomment for OS
 #define UNUSED_PINS
 
 /* COL2ROW or ROW2COL */
