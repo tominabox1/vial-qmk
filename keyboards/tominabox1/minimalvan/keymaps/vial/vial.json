@@ -1,0 +1,21 @@
+{
+    "name": "BigBoy",
+    "vendorId": "0x7431",
+    "productId": "0x6D61",
+    "lighting": "qmk_rgblight",
+    "matrix": {
+        "rows": 1,
+        "cols": 1
+    },
+    "layouts": {
+        "labels":[],
+        "keymap":[
+            [
+              {
+                "w": 1.75
+              },
+              "0,0"
+            ]
+          ]
+    }
+}

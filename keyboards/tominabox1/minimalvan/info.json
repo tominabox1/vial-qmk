@@ -1,0 +1,12 @@
+{
+    "keyboard_name": "min(mal)van",
+    "url": "",
+    "maintainer": "tominabox1",
+    "layouts": {
+        "LAYOUT": {
+            "layout": [
+                {"label":"1", "x":0, "y":0}
+            ]
+        }
+    }
+}
