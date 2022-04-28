@@ -20,13 +20,13 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_2us(
-        KC_1,      KC_2,    MO(1),     KC_MUTE
+        KC_1,      KC_2,    MO(1)
         ),
     [1] = LAYOUT_2us(
-        RESET,     KC_NO,   KC_NO,   KC_NO
+        RESET,     KC_NO,   KC_NO
         ),
     [2] = LAYOUT_2us(
-        KC_NO,     KC_NO,   KC_NO,   KC_NO
+        KC_NO,     KC_NO,   KC_NO
         ),
 };
 
