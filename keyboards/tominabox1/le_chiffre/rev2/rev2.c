@@ -13,9 +13,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#pragma once
+#include "rev2.h"
 
-#define IGNORE_MOD_TAP_INTERRUPT //helps with homerow mods
+#ifdef RGB_MATRIX_ENABLE
+led_config_t g_led_config = { {
+  // Key Matrix to LED Index
+  { 3, 4, NO_LED, 5, 6 },
+  { NO_LED, NO_LED, 10, NO_LED, NO_LED },
+  { NO_LED, NO_LED, 9, NO_LED, NO_LED },
+  { 2, 1, 0, 8, 7 }
+}, {
 
-#define COMBO_COUNT 5
-#define COMBO_TERM 30
+  // LED Index to Physical Position
+  { 128, 64 }, { 77, 64 }, { 0, 48 }, { 0, 0 }, { 115, 0 }, { 166, 0 }, { 255, 0 }, { 255, 48 }, { 178, 64 }, { 128, 40 }, { 128, 30 }
+}, {
+
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+} };
+#endif
