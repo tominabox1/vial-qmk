@@ -1,25 +1,34 @@
 #pragma once
 
 // Tapping term settings
+#undef TAPPING_TERM
+#define TAPPING_TERM 50
+#define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
 #define TAPPING_TERM_PER_KEY
-#define TAP_HOLD_CAPS_DELAY 350
-#define BOOTMAGIC_KEY_SALT KC_BSPACE
-#define BOOTMAGIC_KEY_EEPROM_CLEAR KC_Q
+#define IGNORE_TAPPING_FORCE_HOLD_PER_KEY
+#define PERMISSIVE_HOLD_PER_KEY
 
-// OLED settings
-#define OLED_FONT_H "users/tominabox1/doug.c"
-#define OLED_DISABLE_TIMEOUT
+// Combos
+// #undef COMBO_COUNT
+// #define COMBO_COUNT
+// #define COMBO_VARIABLE_LEN
+#define COMBO_TERM 30
+#undef COMBO_TERM_PER_COMBO
+// #define COMBO_ALLOW_ACTION_KEYS
+// #define COMBO_MUST_HOLD_MODS
 
-#define DEBOUNCE 5
+/* Mousekey stuff */
+#ifdef MOUSEKEY_ENABLE
+  #define MOUSEKEY_INTERVAL 12
+  #define MOUSEKEY_MAX_SPEED 6
+  #define MOUSEKEY_TIME_TO_MAX 50
+  #define MOUSEKEY_DELAY 20
+#endif
 
-// Setup RGB settings for the Dimple.
-#ifdef KEYBOARD_lazydesigners_dimple
-  #ifdef RGBLIGHT_ENABLE
-    #undef RGBLED_NUM
-    #define RGBLED_NUM 50
-    #define RGBLIGHT_ANIMATIONS
-    #define RGBLIGHT_SLEEP
-  #endif // RGBLIGHT_ENABLE
+#ifdef DYNAMIC_MACRO_ENABLE
+#    define DYNAMIC_MACRO_NO_NESTING
+#   // define DYNAMIC_MACRO_SIZE 24
+#endif
 
   #ifdef RGB_MATRIX_ENABLE
   #undef RGBLED_NUM

@@ -106,6 +106,10 @@ MAIN_KEYMAP_PATH_2 := $(KEYBOARD_PATH_2)/keymaps/$(KEYMAP)
 MAIN_KEYMAP_PATH_3 := $(KEYBOARD_PATH_3)/keymaps/$(KEYMAP)
 MAIN_KEYMAP_PATH_4 := $(KEYBOARD_PATH_4)/keymaps/$(KEYMAP)
 MAIN_KEYMAP_PATH_5 := $(KEYBOARD_PATH_5)/keymaps/$(KEYMAP)
+MAIN_USER_KEYMAPS := users/$(KEYMAP)/keymaps
+
+KEYMAP_USER_PATH_1 := $(MAIN_USER_KEYMAPS)/$(KEYBOARD)
+KEYMAP_USER_PATH_2 := $(MAIN_USER_KEYMAPS)/$(subst /,_,$(KEYBOARD))
 
 # Pull in rules from info.json
 INFO_RULES_MK = $(shell $(QMK_BIN) generate-rules-mk --quiet --escape --keyboard $(KEYBOARD) --output $(KEYBOARD_OUTPUT)/src/info_rules.mk)
@@ -117,7 +121,15 @@ include $(BUILDDEFS_PATH)/build_json.mk
 # Pull in keymap level rules.mk
 ifeq ("$(wildcard $(KEYMAP_PATH))", "")
     # Look through the possible keymap folders until we find a matching keymap.c
-    ifneq ("$(wildcard $(MAIN_KEYMAP_PATH_5)/keymap.c)","")
+    ifneq ("$(wildcard $(KEYMAP_USER_PATH_2)_keymap.c)","")
+        -include $(KEYMAP_USER_PATH_2)_rules.mk
+        KEYMAP_C := $(KEYMAP_USER_PATH_2)_keymap.c
+        KEYMAP_PATH := $(MAIN_USER_KEYMAPS)
+    else ifneq ("$(wildcard $(KEYMAP_USER_PATH_1)/keymap.c)","")
+        -include $(KEYMAP_USER_PATH_1)/rules.mk
+        KEYMAP_C := $(KEYMAP_USER_PATH_1)/keymap.c
+        KEYMAP_PATH := $(KEYMAP_USER_PATH_1)
+    else ifneq ("$(wildcard $(MAIN_KEYMAP_PATH_5)/keymap.c)","")
         -include $(MAIN_KEYMAP_PATH_5)/rules.mk
         KEYMAP_C := $(MAIN_KEYMAP_PATH_5)/keymap.c
         KEYMAP_PATH := $(MAIN_KEYMAP_PATH_5)
@@ -146,28 +158,11 @@ ifeq ("$(wildcard $(KEYMAP_PATH))", "")
     endif
 endif
 
-# Have we found a keymap.json?
-ifneq ("$(wildcard $(KEYMAP_JSON))", "")
-    KEYMAP_C := $(KEYMAP_OUTPUT)/src/keymap.c
-    KEYMAP_H := $(KEYMAP_OUTPUT)/src/config.h
-
-    # Load the keymap-level rules.mk if exists
-    -include $(KEYMAP_PATH)/rules.mk
-
-    # Load any rules.mk content from keymap.json
-    INFO_RULES_MK = $(shell $(QMK_BIN) generate-rules-mk --quiet --escape --keyboard $(KEYBOARD) --keymap $(KEYMAP) --output $(KEYMAP_OUTPUT)/src/rules.mk)
-    include $(INFO_RULES_MK)
-
-# Add rules to generate the keymap files - indentation here is important
-$(KEYMAP_OUTPUT)/src/keymap.c: $(KEYMAP_JSON)
-	$(QMK_BIN) json2c --quiet --output $(KEYMAP_C) $(KEYMAP_JSON)
-
-$(KEYMAP_OUTPUT)/src/config.h: $(KEYMAP_JSON)
-	$(QMK_BIN) generate-config-h --quiet --keyboard $(KEYBOARD) --keymap $(KEYMAP) --output $(KEYMAP_H)
-
-generated-files: $(KEYMAP_OUTPUT)/src/config.h $(KEYMAP_OUTPUT)/src/keymap.c
-
+# Userspace setup and definitions
+ifeq ("$(USER_NAME)","")
+    USER_NAME := $(KEYMAP)
 endif
+USER_PATH := users/$(USER_NAME)
 
 ifeq ($(strip $(CTPC)), yes)
     CONVERT_TO_PROTON_C=yes
@@ -288,6 +283,9 @@ endif
 ifneq ("$(wildcard $(KEYBOARD_PATH_1)/config.h)","")
     CONFIG_H += $(KEYBOARD_PATH_1)/config.h
 endif
+ifneq ("$(wildcard $(USER_PATH)/config.h)","")
+    CONFIG_H += $(USER_PATH)/config.h
+endif
 
 POST_CONFIG_H :=
 ifneq ("$(wildcard $(KEYBOARD_PATH_1)/post_config.h)","")
@@ -345,7 +343,7 @@ ifeq ("$(USER_NAME)","")
 endif
 USER_PATH := users/$(USER_NAME)
 
-# Pull in user level rules.mk
+# Include the userspace rules.mk file
 -include $(USER_PATH)/rules.mk
 ifneq ("$(wildcard $(USER_PATH)/config.h)","")
     CONFIG_H += $(USER_PATH)/config.h
@@ -374,7 +372,9 @@ ifneq ("$(wildcard $(KEYBOARD_PATH_5)/post_rules.mk)","")
     include $(KEYBOARD_PATH_5)/post_rules.mk
 endif
 
-ifneq ("$(wildcard $(KEYMAP_PATH)/config.h)","")
+ifneq ("$(wildcard $(KEYMAP_USER_PATH_2)_config.h)","")
+    CONFIG_H += $(KEYMAP_USER_PATH_2)_config.h
+else ifneq ("$(wildcard $(KEYMAP_PATH)/config.h)","")
     CONFIG_H += $(KEYMAP_PATH)/config.h
 endif
 ifneq ("$(KEYMAP_H)","")
