@@ -23,20 +23,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_1,      KC_2,    MO(1)
         ),
     [1] = LAYOUT_2us(
-        RESET,     KC_NO,   KC_NO
+        QK_BOOT,     KC_NO,   KC_NO
         ),
     [2] = LAYOUT_2us(
         KC_NO,     KC_NO,   KC_NO
         ),
 };
-
-bool encoder_update_user(uint8_t index, bool clockwise) {
-  if (index == 0) { /* First encoder */
-    if (clockwise) {
-      tap_code(KC_VOLU);
-    } else {
-      tap_code(KC_VOLD);
-    }
-  }
-  return false;
-}
