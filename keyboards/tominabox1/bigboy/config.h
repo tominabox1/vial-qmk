@@ -27,8 +27,8 @@
 
 /* key matrix size */
 #define DIRECT_PINS { \
-    { D0, B1, B0 }, \
-    { B7, B2, B3 } \
+    { D0, B1, B0, C7 }, \
+    { B7, B2, B3, NO_PIN } \
 }
 
 #define UNUSED_PINS
