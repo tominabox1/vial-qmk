@@ -22,6 +22,7 @@
 #define VENDOR_ID       0x7431
 #define PRODUCT_ID      0x646C
 #define DEVICE_VER      0x0001
+#define MANUFACTURER    tominabox1
 #define PRODUCT         DansKeyboard
 
 /* key matrix size */
