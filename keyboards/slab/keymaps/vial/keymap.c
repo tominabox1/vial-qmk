@@ -62,13 +62,15 @@ enum layer_names { _BASE };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base */
-    [_BASE] = LAYOUT(KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8)};
-
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (clockwise) {
-        tap_code_delay(KC_UP, 10);
-    } else {
-        tap_code_delay(KC_DOWN, 10);
-    }
-    return true;
+    [0] = LAYOUT(KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8),
+    [1] = LAYOUT(KC_A, KC_B, KC_C, KC_D, KC_E, KC_F, KC_G, KC_H),
+    [2] = LAYOUT(KC_Z, KC_X, KC_Y, KC_W, KC_T, KC_S, KC_R, KC_Q)
 };
+
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [0] = {ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN)},
+    [1] = {ENCODER_CCW_CW(KC_UP, KC_DOWN)},
+    [2] = {ENCODER_CCW_CW(KC_PGUP, KC_PGDN)},
+};
+#endif
